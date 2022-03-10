@@ -17,19 +17,18 @@ async def start_command(msg: types.Message):
     while True:
         if old_price != new_price():
             await msg.reply(f'Название товара: {text_price()}\nНовая цена: {new_price()}\nСтарая цена: {old_price}\nДата: {date.strftime("%d/%m/%Y  %H:%M:%S")}')
-        else:
-            continue
+            old_price = new_price()
 
 
 async def new_price():
     resp = requests.get(url)
-    soup = BeautifulSoup(resp.text, 'lxml')
+    soup = BeautifulSoup(resp.content, 'lxml')
     price = soup.find('h2').text.strip()
     return int(price)
 
 async def text_price():
     resp = requests.get(url)
-    soup = BeautifulSoup(resp.text, 'lxml')
+    soup = BeautifulSoup(resp.content, 'lxml')
     name = soup.find('h1').text.strip()
     return str(name)
 
