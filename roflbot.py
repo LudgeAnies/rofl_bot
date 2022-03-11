@@ -5,6 +5,7 @@ import bs4
 import requests
 from aiogram import *
 from bs4 import BeautifulSoup
+from time import sleep
 
 url = 'http://gendalf.cf/'
 bot = Bot(token='5249454736:AAGR3O6RcXnH3Xcy1zBh8sraQUmFeCtfXYQ')
@@ -34,6 +35,7 @@ async def start_command(msg: types.Message):
                             f'\nСтарая цена: {old_price}'
                             f'\nДата: {date_format}')
             old_price = actual_price
+        sleep(10)
 
 
 def get_price(soup: bs4.BeautifulSoup) -> str:
